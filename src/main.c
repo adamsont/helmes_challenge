@@ -19,6 +19,9 @@ size_t getFilesize(const char* filename) {
 }
 
 void fillToLowerMap(uint8_t* map) {
+    for(uint8_t i = 0; i < 0xFF; i++) {
+        map[i] = i;
+    }
     uint8_t c = 'A';
     while(1) {
         map[c] = c+32;
@@ -38,6 +41,7 @@ void fillToLowerMap(uint8_t* map) {
     map[0xFC] = 0xFC;
     map[0x21] = 0x21;
     map[0x27] = 0x27;
+	map[0x2D] = 0x2D;
 }
 
 int fixInput(const uint8_t* input, int l, uint8_t* output, uint8_t* toLower) {
@@ -156,8 +160,7 @@ int main(int argc, char** argv) {
     } else {
         resultBuf[0] = '\0';
     }
-
-
+    
     clock_gettime(CLOCK_MONOTONIC, &endT);
 
     long nanos_used = (endT.tv_sec - startT.tv_sec) * 1000000000 + (endT.tv_nsec - startT.tv_nsec);
